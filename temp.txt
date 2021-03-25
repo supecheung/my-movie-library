@@ -1,0 +1,153 @@
+            <div id='1' class="movie show-side-1">
+                <div class="side-1">
+                    <div class="title">There Will Be Blood</div>
+                    <img src="https://upload.wikimedia.org/wikipedia/en/thumb/d/da/There_Will_Be_Blood_Poster.jpg/220px-There_Will_Be_Blood_Poster.jpg">
+                    <div class="rating">
+                        9.5
+                    </div>  
+                </div>
+                <div class="side-2">
+                    <div class="director">Directed by: <br><span class='director-name'>Paul Wes. Anderson</span></div>        
+                    <div class="comments">Comment: <br><span class="comment">Movie was very goodgoodeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee. Loved the visuals and stuff.</span></div>
+                </div>
+                <div class="movie-controls">
+                    <button id='edit-movie'>Edit</button>
+                    <button id='delete-movie'>Delete</button>
+                </div>
+            </div>
+            <div id='1' class="movie show-side-1">
+                <div class="side-1">
+                    <div class="title">There Will Be Blood</div>
+                    <img src="https://upload.wikimedia.org/wikipedia/en/thumb/d/da/There_Will_Be_Blood_Poster.jpg/220px-There_Will_Be_Blood_Poster.jpg">
+                    <div class="rating">
+                        9.5
+                    </div>  
+                </div>
+                <div class="side-2">
+                    <div class="director">Directed by: <br><span class='director-name'>Paul Wes. Anderson</span></div>        
+                    <div class="comments">Comment: <br><span class="comment">Movie was very goodgoodeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee. Loved the visuals and stuff.</span></div>
+                </div>
+                <div class="movie-controls">
+                    <button id='edit-movie'>Edit</button>
+                    <button id='delete-movie'>Delete</button>
+                </div>
+            </div>
+            <div id='1' class="movie show-side-1">
+                <div class="side-1">
+                    <div class="title">There Will Be Blood</div>
+                    <img src="https://upload.wikimedia.org/wikipedia/en/thumb/d/da/There_Will_Be_Blood_Poster.jpg/220px-There_Will_Be_Blood_Poster.jpg">
+                    <div class="rating">
+                        9.5
+                    </div>  
+                </div>
+                <div class="side-2">
+                    <div class="director">Directed by: <br><span class='director-name'>Paul Wes. Anderson</span></div>        
+                    <div class="comments">Comment: <br><span class="comment">Movie was very goodgoodeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee. Loved the visuals and stuff.</span></div>
+                </div>
+                <div class="movie-controls">
+                    <button id='edit-movie'>Edit</button>
+                    <button id='delete-movie'>Delete</button>
+                </div>
+            </div>
+            <div id='1' class="movie show-side-1">
+                <div class="side-1">
+                    <div class="title">There Will Be Blood</div>
+                    <img src="https://upload.wikimedia.org/wikipedia/en/thumb/d/da/There_Will_Be_Blood_Poster.jpg/220px-There_Will_Be_Blood_Poster.jpg">
+                    <div class="rating">
+                        9.5
+                    </div>  
+                </div>
+                <div class="side-2">
+                    <div class="director">Directed by: <br><span class='director-name'>Paul Wes. Anderson</span></div>        
+                    <div class="comments">Comment: <br><span class="comment">Movie was very goodgoodeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee. Loved the visuals and stuff.</span></div>
+                </div>
+                <div class="movie-controls">
+                    <button id='edit-movie'>Edit</button>
+                    <button id='delete-movie'>Delete</button>
+                </div>
+            </div>
+            <div id='1' class="movie show-side-1">
+                <div class="side-1">
+                    <div class="title">There Will Be Blood</div>
+                    <img src="https://upload.wikimedia.org/wikipedia/en/thumb/d/da/There_Will_Be_Blood_Poster.jpg/220px-There_Will_Be_Blood_Poster.jpg">
+                    <div class="rating">
+                        9.5
+                    </div>  
+                </div>
+                <div class="side-2">
+                    <div class="director">Directed by: <br><span class='director-name'>Paul Wes. Anderson</span></div>        
+                    <div class="comments">Comment: <br><span class="comment">Movie was very goodgoodeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee. Loved the visuals and stuff.</span></div>
+                </div>
+                <div class="movie-controls">
+                    <button id='edit-movie'>Edit</button>
+                    <button id='delete-movie'>Delete</button>
+                </div>
+            </div>
+            <div id='1' class="movie show-side-1">
+                <div class="side-1">
+                    <div class="title">There Will Be Blood</div>
+                    <img src="https://upload.wikimedia.org/wikipedia/en/thumb/d/da/There_Will_Be_Blood_Poster.jpg/220px-There_Will_Be_Blood_Poster.jpg">
+                    <div class="rating">
+                        9.5
+                    </div>  
+                </div>
+                <div class="side-2">
+                    <div class="director">Directed by: <br><span class='director-name'>Paul Wes. Anderson</span></div>        
+                    <div class="comments">Comment: <br><span class="comment">Movie was very goodgoodeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee. Loved the visuals and stuff.</span></div>
+                </div>
+                <div class="movie-controls">
+                    <button id='edit-movie'>Edit</button>
+                    <button id='delete-movie'>Delete</button>
+                </div>
+            </div>
+            <div id='1' class="movie show-side-1">
+                <div class="side-1">
+                    <div class="title">There Will Be Blood</div>
+                    <img src="https://upload.wikimedia.org/wikipedia/en/thumb/d/da/There_Will_Be_Blood_Poster.jpg/220px-There_Will_Be_Blood_Poster.jpg">
+                    <div class="rating">
+                        9.5
+                    </div>  
+                </div>
+                <div class="side-2">
+                    <div class="director">Directed by: <br><span class='director-name'>Paul Wes. Anderson</span></div>        
+                    <div class="comments">Comment: <br><span class="comment">Movie was very goodgoodeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee. Loved the visuals and stuff.</span></div>
+                </div>
+                <div class="movie-controls">
+                    <button id='edit-movie'>Edit</button>
+                    <button id='delete-movie'>Delete</button>
+                </div>
+            </div>
+            <div id='1' class="movie show-side-1">
+                <div class="side-1">
+                    <div class="title">There Will Be Blood</div>
+                    <img src="https://upload.wikimedia.org/wikipedia/en/thumb/d/da/There_Will_Be_Blood_Poster.jpg/220px-There_Will_Be_Blood_Poster.jpg">
+                    <div class="rating">
+                        9.5
+                    </div>  
+                </div>
+                <div class="side-2">
+                    <div class="director">Directed by: <br><span class='director-name'>Paul Wes. Anderson</span></div>        
+                    <div class="comments">Comment: <br><span class="comment">Movie was very goodgoodeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee. Loved the visuals and stuff.</span></div>
+                </div>
+                <div class="movie-controls">
+                    <button id='edit-movie'>Edit</button>
+                    <button id='delete-movie'>Delete</button>
+                </div>
+            </div>
+            <div id='1' class="movie show-side-1">
+                <div class="side-1">
+                    <div class="title">There Will Be Blood</div>
+                    <img src="https://upload.wikimedia.org/wikipedia/en/thumb/d/da/There_Will_Be_Blood_Poster.jpg/220px-There_Will_Be_Blood_Poster.jpg">
+                    <div class="rating">
+                        9.5
+                    </div>  
+                </div>
+                <div class="side-2">
+                    <div class="director">Directed by: <br><span class='director-name'>Paul Wes. Anderson</span></div>        
+                    <div class="comments">Comment: <br><span class="comment">Movie was very goodgoodeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee. Loved the visuals and stuff.</span></div>
+                </div>
+                <div class="movie-controls">
+                    <button id='edit-movie'>Edit</button>
+                    <button id='delete-movie'>Delete</button>
+                </div>
+            </div>

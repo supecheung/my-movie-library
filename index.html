@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="dist/style.css">
+    <!-- JS -->
+    <script defer src='index.js'></script>
+    <title>MyMovies</title>
+</head>
+<body>
+    <header>
+        <div id="header-name">
+            <h1>M<span id='header-name-y'>y</span>Movies</h1>
+        </div>
+        <div id="toggle-info">
+            <button id='toggle-info-button'>Info</button>
+        </div>
+    </header>
+    <main>
+        <section id='controls'>
+            <div id='sort'>
+                <label for="sort-control">Sort by: </label>
+                <select id="sort-control">
+                    <option value="order-added">Order added</option>
+                    <option value="director">Director</option>
+                    <option value="title">Title</option>
+                    <option value="date">Date</option>
+                    <option value="rating">Rating</option>
+                </select>
+                <select id="sort-control-order">
+                    <option value="desc">Descending</option>
+                    <option value="asc">Ascending</option>
+                </select>
+            </div>
+            <div id="add-movie">
+                <button id='add-movie-button'>Add Movie</button>
+                <div id="add-movie-modal">
+                    <div id="modal-background">
+
+                    </div>
+                    <form id='add-movie-form' autocomplete="off">
+                        <h2>Add Movie</h2>
+                        <input required id='title-input' type="text" placeholder="Title">
+                        <input id='director-input' type="text" placeholder="Director">
+                        <input id='year-input' type="number" min='1900' max='2100' placeholder="Year">
+                        <input id='rating-input' type="number" min='0' max='10' placeholder="Rating">
+                        <div id="watched-input-container">
+                            <label for="watched-input">Watched: </label>
+                            <input id='watched-input' type="checkbox">
+                        </div>
+                        <textarea id="comment-input" cols="20" rows="5" placeholder="Comment"></textarea>
+                        <input type="url" id='image-input' placeholder="Image URL">
+                        <!-- type='button' necessary so form doesn't think there are two submits -->
+                        <button type='button' id='cancel-button'>Cancel</button> 
+                        <button id='submit-button' type="submit">Add Movie</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+        <section id='movies'> 
+
+
+
+
+        </section>
+    </main>
+
+</body>
+</html>
