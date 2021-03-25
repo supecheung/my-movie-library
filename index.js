@@ -1,8 +1,11 @@
-// global library
+// GLOBAL MOVIE LIBRARY
+
 let movieLibrary = [];
 let currentId = 0;
 
-// the constructor
+
+// MOVIE CONSTRUCTOR
+
 function Movie(obj) {
     this.id = obj.id;
     this.title = obj.title;
@@ -14,38 +17,74 @@ function Movie(obj) {
     this.imageURL = obj.imageURL;
 }
 
-// Selectors
-const addMovieButton = document.querySelector("#add-movie-button");
-const addMovieModal = document.querySelector("#add-movie-modal");
-const submitButton = document.querySelector("#submit-button");
-const cancelButton = document.querySelector("#cancel-button");
-const modalBackground = document.querySelector("#modal-background");
 
-// basic events
-modalBackground.addEventListener("click", closeModal);
-cancelButton.addEventListener("click", closeModal);
-addMovieButton.addEventListener("click", () => {
-    openModal();
-});
-submitButton.addEventListener("click", (event) => {
-    handleSubmissionEvent(event);
-});
+// ADD MOVIE MODAL
 
-function handleSubmissionEvent(event) {
-    event.preventDefault();
-    
-    if (validateForm()) {
+const modal = (function() {
+    // SELECTORS
+    const addMovieButton = document.querySelector("#add-movie-button");
+    const cancelButton = document.querySelector("#cancel-button");
+    const modalBackground = document.querySelector("#modal-background");
+    const addMovieForm = document.querySelector("#add-movie-form");
+    const yearInput = document.querySelector("#year-input");
+
+    // Update max year to be the current year
+    const currentYear = new Date().getFullYear();
+    yearInput.setAttribute("max", currentYear);
+
+    // BASIC EVENTS
+    modalBackground.addEventListener("click", closeModal);
+    cancelButton.addEventListener("click", closeModal);
+    addMovieButton.addEventListener("click", () => {
+        openModal();
+    });
+
+    // SUBMIT FORM
+    addMovieForm.addEventListener("submit", (event) => {
+        event.preventDefault();
         submitHandler();
+    });
+
+    // MODAL FUNCTIONS
+    function openModal() {
+        const modal = document.querySelector("#add-movie-modal");
+        modal.style.display = 'block';
+    
+        // Focus on the title input first 
+        const titleInput = document.querySelector("#title-input");
+        titleInput.focus();
     }
-}
+    
+    function closeModal() {
+        const modal = document.querySelector("#add-movie-modal");
+        const modalForm = document.querySelector("#add-movie-form");
+        modal.style.display = 'none';
+        modalForm.reset();
+    
+        // Make sure the currentID is up-to-date
+        updateId();
+    
+        // Revert form to original (in case it is still 'Edit Form')
+        changeFormToSubmit();
+    }
+
+    // Exports
+    return {
+        openModal, closeModal
+    }
+})();
+
+
+// FORM
 
 function submitHandler() {
-    // get form data
+    // Get form data
     const formData = getFormInputs();
 
-    // convert form data to movie object
+    // Feed data into the Movie constructor
     const newMovie = new Movie(formData);
 
+    // Check if the form was an Edit event (by comparing Ids)
     const replaceStatus = checkIfReplace(newMovie);
     if (replaceStatus >= 0) {
         movieLibrary.splice(replaceStatus, 1, newMovie);
@@ -53,21 +92,20 @@ function submitHandler() {
         movieLibrary.push(newMovie);
     }
 
-    // update id
+    // Update Id to the highest in the list
     updateId();
 
-    // close and reset modal
-    closeModal();
-    changeFormToSubmit();
+    // Close modal
+    modal.closeModal();
 
-    // update order
-    sortControlHandler();
+    // Sort added object accordingly 
+    sortControls.sortControlHandler();
 
-    // render
+    // Re-render all the objects
     render();
 }
 
-// checks if the id already exists previously
+// CHECK FOR EXISTING ID IN THE LIBRARY; IF TRUE, RETURNS IT
 function checkIfReplace(movieObj) {
     for (let i = 0; i < movieLibrary.length; i++) {
         if (movieLibrary[i].id === movieObj.id) {
@@ -78,8 +116,9 @@ function checkIfReplace(movieObj) {
     return -1;
 }
 
+// RETRIEVE FORM DATA
 function getFormInputs() {
-    // form input selectors
+    // Selectors
     const id = currentId;
     const title = document.querySelector("#title-input").value;
     const director = document.querySelector("#director-input").value;
@@ -94,49 +133,8 @@ function getFormInputs() {
     }
 }
 
-function openModal() {
-    const modal = document.querySelector("#add-movie-modal");
-    modal.style.display = 'block';
 
-    // when open, focus on title 
-    const titleInput = document.querySelector("#title-input");
-    titleInput.focus();
-}
-
-function closeModal() {
-    //get modal selector
-    const modal = document.querySelector("#add-movie-modal");
-    const modalForm = document.querySelector("#add-movie-form");
-    modal.style.display = 'none';
-    modalForm.reset();
-
-    // clean out any lag on the currentId that may arise
-    updateId();
-
-    // revert form to original
-    changeFormToSubmit();
-}
-
-function validateForm() {
-    // get year for year validatoin
-    const currentYear = new Date().getFullYear();
-
-    const formData = getFormInputs();
-    if (formData.title === "") {
-        alert("Please enter a movie title.");
-        return false;
-    } else if (formData.year !== "" && (formData.year < 1888 || formData.year > currentYear)) {
-        alert("Pleae enter a valid year between 1888 and " + currentYear + ".");
-        return false;
-    } else if (formData.rating !== "" && (formData.rating < 1 || formData.rating > 10)) {
-        alert("Please enter a valid rating between 1-10.");
-        return false;
-    }
-
-    return true;
-}
-
-//update id to be one above the highest value in the array
+// UPDATE ID TO BE THE HIGHEST IN THE LIBRARY
 function updateId() {
     let champion = 0;
     for (let movie of movieLibrary) {
@@ -149,25 +147,22 @@ function updateId() {
 }
 
 
-// handle side switching
-const movies = document.querySelectorAll(".movie");
-movies.forEach(movie => movie.addEventListener("mousedown", event => {
-    switchMovieSide(event);
-}));
+// MOVIE ELEMENT
 
-//switch from side one to side two
+// HANDLE SIDE-SWITCHING FOR MOVIE ELEMENTS
 function switchMovieSide(event) {
-
-    //make sure that what is clicked are not the edit buttons
+    // Ignore clicks on the Edit and Delete buttons
     if (event.target.classList.contains("edit-movie") || event.target.classList.contains("delete-movie")) {
         return;
     }
 
-    const target = event.currentTarget; //only get the '.movie' target and not its children
+    // Ensure that child elements don't recieve the event
+    const target = event.currentTarget; 
     target.classList.toggle("show-side-1");
     const targetSide1 = target.querySelector(".side-1");
     const targetSide2 = target.querySelector(".side-2");
 
+    // Side switching
     if (target.classList.contains("show-side-1")) {
         targetSide1.style.display = "block";
         targetSide2.style.display = 'none';
@@ -177,6 +172,7 @@ function switchMovieSide(event) {
     }
 }
 
+// Show Edit and Delete When User Hovers Over Movie Element 
 function showMovieControls(event) {
     const target = event.currentTarget;
     const movieControls = target.querySelector(".movie-controls");
@@ -189,10 +185,18 @@ function hideMovieControls(event) {
     movieControls.style.display = "none";
 }
 
-// create a DOM element for each movie
+// CREATE DOM ELEMENT FOR MOVIE
 function createMovie(movieObj) {
+    // Movies section selector
     const moviesSection = document.querySelector("#movies");
 
+    // Preliminary logic
+    // Make image black if none is provided
+    if (!movieObj.imageURL) {
+        movieObj.imageURL = 'https://images.unsplash.com/photo-1590272456521-1bbe160a18ce?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1000&q=80';
+    }
+    
+    // Create DOM elements
     const containerDiv = document.createElement("div");
     const side1 = document.createElement("div");
     const side1Title = document.createElement("div");
@@ -210,6 +214,7 @@ function createMovie(movieObj) {
     const movieControlsEdit = document.createElement("button");
     const movieControlsDelete = document.createElement("button");
 
+    // Container div
     containerDiv.setAttribute("id", movieObj.id);
     containerDiv.classList.add("movie");
     if (movieObj.watched) {
@@ -217,11 +222,7 @@ function createMovie(movieObj) {
     }
     containerDiv.classList.add("show-side-1");
 
-    // round rating
-    if (movieObj.rating) {
-        movieObj.rating = Number(movieObj.rating).toFixed(1);
-    }
-
+    // Side 1
     side1.classList.add("side-1");
     side1Title.classList.add("title");
     side1Title.textContent = movieObj.title;
@@ -230,7 +231,12 @@ function createMovie(movieObj) {
     side1Img.setAttribute("src", movieObj.imageURL);
     side1Rating.classList.add("rating");
     side1Rating.textContent = movieObj.rating;
+    // Add year beside title if it exists
+    if (side1Year.textContent !== "") {
+        side1Title.appendChild(side1Year);
+    }
 
+    // Side 2
     side2.classList.add("side-2");
     side2Director.classList.add("director");
     side2Director.textContent = "Directed by: ";
@@ -241,20 +247,19 @@ function createMovie(movieObj) {
     side2CommentsSpan.classList.add("comment");
     side2CommentsSpan.textContent = movieObj.comment;
 
+    // Movie controls
     movieControls.classList.add("movie-controls");
     movieControlsEdit.classList.add("edit-movie");
     movieControlsEdit.textContent = "Edit";
     movieControlsDelete.classList.add("delete-movie");
     movieControlsDelete.textContent = "Delete";
 
-    // check if year is empty
-    if (side1Year.textContent !== "") {
-        side1Title.appendChild(side1Year);
-    }
+    // Side 1 append children
     side1.appendChild(side1Title);
     side1.appendChild(side1Img);
     side1.appendChild(side1Rating);
 
+    // Side2 append children
     side2Director.appendChild(side2DirectorBr);
     side2Director.appendChild(side2DirectorSpan);
     side2Comments.appendChild(side2CommentsBr);
@@ -262,14 +267,16 @@ function createMovie(movieObj) {
     side2.appendChild(side2Director);
     side2.appendChild(side2Comments);
 
+    // Movie controls append children
     movieControls.appendChild(movieControlsEdit);
     movieControls.appendChild(movieControlsDelete);
 
+    // Container append children
     containerDiv.appendChild(side1);
     containerDiv.appendChild(side2);
     containerDiv.appendChild(movieControls);
 
-    // add hover effects
+    // Add hover events to show controls
     containerDiv.addEventListener("mouseover", event => {
         showMovieControls(event);
     });
@@ -277,59 +284,39 @@ function createMovie(movieObj) {
         hideMovieControls(event);
     })
 
-    // add flip effects
+    // Add flip event
     containerDiv.addEventListener("mousedown", event => {
         switchMovieSide(event);
     })
 
-    // vivify delete button
+    // Logic for the Delete button
     movieControlsDelete.addEventListener("click", () => {
         movieDeleteButtonHandler(movieObj);
 
     });
 
-    // vivify edit button
+    // Logic for the Edit Button
     movieControlsEdit.addEventListener("click", () => {
         movieEditButtonHandler(movieObj);
 
     });
 
-
+    // Finally, add to the DOM
     moviesSection.appendChild(containerDiv);
 }
 
-// render each element in the library
-function render() {
-    //first, clear previous
-    const movieSection = document.querySelector("#movies");
-    while (movieSection.firstChild) {
-        movieSection.removeChild(movieSection.childNodes[0]);
-    }
 
-    //render element
-    movieLibrary.forEach(movie => {
-        createMovie(movie);
-    })
-
-    // update info 
-    updateInfo();
-
-    // set to local
-    setLocalStorage();
-}
-
-// handler for the button to delete movie
+// DELETE MOVIE FROM LIBRARY
 function movieDeleteButtonHandler(movieObj) {
     movieLibrary = movieLibrary.filter(movie => movie.id !== movieObj.id);
     render();
 }
 
-// handles the editing of a movie
-// open modal and replace previous spot in the library
+// EDIT MOVIE 
 function movieEditButtonHandler(movieObj) {
-    openModal();
+    modal.openModal();
 
-    // prefill form with details
+    // Prefill form for convenience
     const title = document.querySelector("#title-input");
     title.value = movieObj.title;
     const director = document.querySelector("#director-input");
@@ -345,16 +332,14 @@ function movieEditButtonHandler(movieObj) {
     const imageURL = document.querySelector("#image-input");
     imageURL.value = movieObj.imageURL;
 
-    // edit form name
+    // Change 'Add' in the form to 'Edit'
     changeFormToEdit();
 
-    // change currentID to this movieObj.id
+    // Make the currentID to the element to be edited
     currentId = movieObj.id;
-    // in submitHandler, if a matching id in array, replace that item
-    // always make currentID one above the highest in the array
-    // in closeModal, update currentID to be the highest as well to handle cases that the edit window closed prematurely
 }
 
+// CHANGE 'ADD' TO 'EDIT'
 function changeFormToEdit() {
     // edit form name
     const formTitle = document.querySelector("form h2");
@@ -363,6 +348,7 @@ function changeFormToEdit() {
     formSubmit.textContent = "Edit Movie";
 }
 
+// REVERT BACK TO 'ADD'
 function changeFormToSubmit() {
     // edit form name
     const formTitle = document.querySelector("form h2");
@@ -371,117 +357,159 @@ function changeFormToSubmit() {
     formSubmit.textContent = "Add Movie";
 }
 
-// info button
-const infoButton = document.querySelector("#toggle-info-button");
-infoButton.addEventListener("click", infoButtonHandler);
 
-function infoButtonHandler() {
-    // implement info toggling
-    infoToggleShow();
+// INFO BUTTON (SHOWS MOVIE DATA)
 
-    updateInfo();
+const info = (function() {
+    // Button selector
+    const infoButton = document.querySelector("#toggle-info-button");
+    infoButton.addEventListener("click", infoButtonHandler);
 
-}
+    function infoButtonHandler() {
+        // Toggle info display
+        infoToggleShow();
 
-function infoToggleShow() {
-    const infoSection = document.querySelector("#movies-info");
-    infoSection.classList.toggle("movies-info-show");
-    if (infoSection.classList.contains("movies-info-show")) {
-        infoSection.style.display = "block";
-    } else {
-        infoSection.style.display = "none";
-    }
-}
-
-
-function updateInfo() {
-    let totalMovies = 0;
-    let totalWatched = 0;
-
-    const totalMoviesDOM = document.querySelector("#total-movies");
-    const totalWatchedDOM = document.querySelector("#watched-movies");
-    const totalUnwatchedDOM = document.querySelector("#unwatched-movies");
-
-    totalMovies = movieLibrary.length;
-    for (let movie of movieLibrary) {
-        if (movie.watched === true) totalWatched += 1;
+        // Update whenever something in the DOM renders
+        updateInfo();
     }
 
-    totalMoviesDOM.textContent = totalMovies;
-    totalWatchedDOM.textContent = totalWatched;
-    totalUnwatchedDOM.textContent = totalMovies - totalWatched;
-}
+    function infoToggleShow() {
+        const infoSection = document.querySelector("#movies-info");
+        infoSection.classList.toggle("movies-info-show");
+        if (infoSection.classList.contains("movies-info-show")) {
+            infoSection.style.display = "block";
+        } else {
+            infoSection.style.display = "none";
+        }
+    }
 
-// implement movie sorting
-const sortControl = document.querySelector("#sort-control");
-const sortControlOrder = document.querySelector("#sort-control-order");
 
-sortControl.addEventListener("change", () => {
-    sortControlHandler();
-});
+    // Info updater
+    function updateInfo() {
+        let totalMovies = 0;
+        let totalWatched = 0;
 
-sortControlOrder.addEventListener("change", () => {
-    sortControlHandler();
-});
+        const totalMoviesDOM = document.querySelector("#total-movies");
+        const totalWatchedDOM = document.querySelector("#watched-movies");
+        const totalUnwatchedDOM = document.querySelector("#unwatched-movies");
 
-function sortControlHandler() {
+        totalMovies = movieLibrary.length;
+        for (let movie of movieLibrary) {
+            if (movie.watched === true) totalWatched += 1;
+        }
+
+        totalMoviesDOM.textContent = totalMovies;
+        totalWatchedDOM.textContent = totalWatched;
+        totalUnwatchedDOM.textContent = totalMovies - totalWatched;
+    }
+
+    return {
+        updateInfo
+    }
+})();
+
+
+// SORT CONTROLS
+
+const sortControls = (function() {
     const sortControl = document.querySelector("#sort-control");
     const sortControlOrder = document.querySelector("#sort-control-order");
-
-    const sortControlValue = sortControl.value;
-    const sortControlOrderValue = sortControlOrder.value;
     
-    // check scenarios
-    if (sortControlValue === 'order-added') {
-        if (sortControlOrderValue === 'desc') {
-            movieLibrary = movieLibrary.sort((a, b) => b.id - a.id);
-            render();
-        } else {
-            movieLibrary = movieLibrary.sort((a, b) => a.id - b.id);
-            render();
+    sortControl.addEventListener("change", () => {
+        sortControlHandler();
+    });
+    
+    sortControlOrder.addEventListener("change", () => {
+        sortControlHandler();
+    });
+    
+    function sortControlHandler() {
+        const sortControl = document.querySelector("#sort-control");
+        const sortControlOrder = document.querySelector("#sort-control-order");
+    
+        const sortControlValue = sortControl.value;
+        const sortControlOrderValue = sortControlOrder.value;
+        
+        // check scenarios
+        if (sortControlValue === 'order-added') {
+            if (sortControlOrderValue === 'desc') {
+                movieLibrary = movieLibrary.sort((a, b) => b.id - a.id);
+                render();
+            } else {
+                movieLibrary = movieLibrary.sort((a, b) => a.id - b.id);
+                render();
+            }
+        } else if (sortControlValue === 'director') {
+            if (sortControlOrderValue === 'desc') {
+                movieLibrary = movieLibrary.sort((a, b) => b.director.localeCompare(a.director));
+                render();
+            } else {
+                movieLibrary = movieLibrary.sort((a, b) => a.director.localeCompare(b.director));
+                render();
+            }
+        } else if(sortControlValue === 'title') {
+            if (sortControlOrderValue === 'desc') {
+                movieLibrary = movieLibrary.sort((a, b) => b.title.localeCompare(a.title));
+                render();
+            } else {
+                movieLibrary = movieLibrary.sort((a, b) => a.title.localeCompare(b.title));
+                render();
+            }
+        } else if(sortControlValue === 'year') {
+            if (sortControlOrderValue === 'desc') {
+                movieLibrary = movieLibrary.sort((a, b) => b.year - a.year);
+                render();
+            } else {
+                movieLibrary = movieLibrary.sort((a, b) => a.year - b.year);
+                render();
+            }
+        } else if (sortControlValue === 'rating') {
+            if (sortControlOrderValue === 'desc') {
+                movieLibrary = movieLibrary.sort((a, b) => b.rating - a.rating);
+                render();
+            } else {
+                movieLibrary = movieLibrary.sort((a, b) => a.rating - b.rating);
+                render();
+            }
         }
-    } else if (sortControlValue === 'director') {
-        if (sortControlOrderValue === 'desc') {
-            movieLibrary = movieLibrary.sort((a, b) => b.director.localeCompare(a.director));
-            render();
-        } else {
-            movieLibrary = movieLibrary.sort((a, b) => a.director.localeCompare(b.director));
-            render();
-        }
-    } else if(sortControlValue === 'title') {
-        if (sortControlOrderValue === 'desc') {
-            movieLibrary = movieLibrary.sort((a, b) => b.title.localeCompare(a.title));
-            render();
-        } else {
-            movieLibrary = movieLibrary.sort((a, b) => a.title.localeCompare(b.title));
-            render();
-        }
-    } else if(sortControlValue === 'year') {
-        if (sortControlOrderValue === 'desc') {
-            movieLibrary = movieLibrary.sort((a, b) => b.year - a.year);
-            render();
-        } else {
-            movieLibrary = movieLibrary.sort((a, b) => a.year - b.year);
-            render();
-        }
-    } else if (sortControlValue === 'rating') {
-        if (sortControlOrderValue === 'desc') {
-            movieLibrary = movieLibrary.sort((a, b) => b.rating - a.rating);
-            render();
-        } else {
-            movieLibrary = movieLibrary.sort((a, b) => a.rating - b.rating);
-            render();
-        }
+    }    
+
+    // EXPORT FUNCTIONS
+    return {
+        sortControlHandler
     }
+})();
+
+
+// RENDER EACH ELEMENT
+function render() {
+    //first, clear previous
+    const movieSection = document.querySelector("#movies");
+    while (movieSection.firstChild) {
+        movieSection.removeChild(movieSection.childNodes[0]);
+    }
+
+    //render element
+    movieLibrary.forEach(movie => {
+        createMovie(movie);
+    })
+
+    // update info 
+    info.updateInfo();
+
+    // set to local
+    setLocalStorage();
 }
 
-// local storage
-// set
+
+// LOCAL STORAGE
+
+// SET
 function setLocalStorage() {
     localStorage.setItem('movieLibrary', JSON.stringify(movieLibrary));
 }
 
-//retrieve
+// RETRIEVE
 function getLocalStorage() {
     const getItem = localStorage.getItem("movieLibrary");
     if (!getItem) {
@@ -491,6 +519,9 @@ function getLocalStorage() {
         movieLibrary = JSON.parse(getItem);
         render();
     }
+
+    // Update the currentID, just in case
+    updateId(); 
 }
 
 getLocalStorage();

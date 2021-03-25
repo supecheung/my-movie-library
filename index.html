@@ -57,7 +57,7 @@
             <div id='sort'>
                 <label for="sort-control">Sort by: </label>
                 <select id="sort-control">
-                    <option value="order-added">Order added</option>
+                    <option selected value="order-added">Order added</option>
                     <option value="director">Director</option>
                     <option value="title">Title</option>
                     <option value="year">Year</option>
@@ -65,7 +65,7 @@
                 </select>
                 <select id="sort-control-order">
                     <option value="desc">Desc.</option>
-                    <option value="asc">Asc.</option>
+                    <option selected value="asc">Asc.</option>
                 </select>
             </div>
             <div id="add-movie">
@@ -78,8 +78,8 @@
                         <h2>Add Movie</h2>
                         <input required id='title-input' type="text" placeholder="Title">
                         <input id='director-input' type="text" placeholder="Director">
-                        <input id='year-input' type="number" min='1900' max='2100' placeholder="Year">
-                        <input id='rating-input' type="number" min='0' max='10' placeholder="Rating">
+                        <input id='year-input' type="number" min='1888' max='2100' placeholder="Year">
+                        <input id='rating-input' type="number" min='1' max='10' placeholder="Rating">
                         <div id="watched-input-container">
                             <label for="watched-input">Watched: </label>
                             <input id='watched-input' type="checkbox">

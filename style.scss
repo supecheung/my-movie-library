@@ -37,6 +37,10 @@ input[type='checkbox'], input[type='submit'] {
     }
 }
 
+// VARIABLES
+$primary: rgb(139, 143, 104);
+$secondary: rgb(100, 100, 100);
+
 // HEADER
 header {
     padding: 15px;
@@ -55,6 +59,7 @@ header {
         #header-name-y {
             text-transform: lowercase;
             font-size: 2.5rem;
+            color:$primary;
         }
     }
 
@@ -68,12 +73,14 @@ header {
 
             i {
                 font-size: 25px;
+                color: $primary;
                 &:hover {
-                    color: rgb(100, 100, 100);
+                    color: $secondary;
                 }
             }
         }
         #movies-info {
+            z-index: 10;
             display: none;
             h2 {
                 text-align: center;
@@ -144,8 +151,9 @@ main {
             border: none;
             i {
                 font-size: 30px;
+                color: black;
                 &:hover {
-                    color:rgb(100, 100, 100);
+                    color:$secondary;
                 }
             }
         }
@@ -167,12 +175,12 @@ main {
                 position: absolute;
                 left: 50%;
                 transform: translateX(-50%);
-                width: 30%;
+                width: 20%;
                 margin: auto;
                 margin-top: -50px;
                 display: flex;
-                border: 1px solid black;
-                padding: 25px;
+                border: 3px solid black;
+                padding: 35px;
                 background-color: white;;
                 flex-direction: column;
                 z-index: 5;
@@ -187,6 +195,7 @@ main {
 
                 input, textarea {
                     margin-bottom: 10px;
+                    border: 1px solid black;
                 }
 
                 textarea {
@@ -211,13 +220,14 @@ main {
 
                 #form-buttons {
                     display: flex;
-                    justify-content: space-between;
+                    justify-content: space-around;
                     button {
+                        margin-top: 20px;
                         border: 1px solid black;
                         &:hover {
                             background-color: rgb(250, 250, 250);
                         }
-                        width: 200px;
+                        width: 100px;
                         height: 50px;
                     }
                 }
@@ -234,8 +244,10 @@ main {
 
     .movie {
         cursor: pointer;
-        border-top: 4px solid black;
+        border-top: 10px solid $secondary;
+        border-radius: 10px;
         padding: 5px;
+        padding-top: 10px;
         overflow: hidden;
         padding-bottom: 30px;
         height: 220px;
@@ -243,9 +255,11 @@ main {
         justify-content: center;
         position: relative;
         .title {
-            height: 35px;
+            height: 30px;
             text-align: center;
-            overflow: hidden;
+            overflow: scroll;
+            overflow-y: auto;
+            overflow-x: hidden;
         }
         .side-1 {
             display: flex;
@@ -254,6 +268,7 @@ main {
             position: relative;
             margin-bottom: -20px;
             overflow: hidden;
+
             .title {
                 font-size: 1.4rem;
                 margin-bottom: 5px;
@@ -328,6 +343,6 @@ main {
     }
 
     .watched {
-        border-top: 4px solid rgb(150, 150, 150);
+        border-top: 10px solid $primary;
     }
 }

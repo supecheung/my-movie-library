@@ -54,6 +54,7 @@ header h1 {
 header h1 #header-name-y {
   text-transform: lowercase;
   font-size: 2.5rem;
+  color: #8b8f68;
 }
 
 header #toggle-info {
@@ -69,6 +70,7 @@ header #toggle-info button {
 
 header #toggle-info button i {
   font-size: 25px;
+  color: #8b8f68;
 }
 
 header #toggle-info button i:hover {
@@ -76,6 +78,7 @@ header #toggle-info button i:hover {
 }
 
 header #toggle-info #movies-info {
+  z-index: 10;
   display: none;
   border: 5px solid black;
   padding: 10px;
@@ -149,6 +152,7 @@ main {
 
 #controls #add-movie button i {
   font-size: 30px;
+  color: black;
 }
 
 #controls #add-movie button i:hover {
@@ -174,14 +178,14 @@ main {
   left: 50%;
   -webkit-transform: translateX(-50%);
           transform: translateX(-50%);
-  width: 30%;
+  width: 20%;
   margin: auto;
   margin-top: -50px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  border: 1px solid black;
-  padding: 25px;
+  border: 3px solid black;
+  padding: 35px;
   background-color: white;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
@@ -200,6 +204,7 @@ main {
 
 #controls #add-movie #add-movie-modal #add-movie-form input, #controls #add-movie #add-movie-modal #add-movie-form textarea {
   margin-bottom: 10px;
+  border: 1px solid black;
 }
 
 #controls #add-movie #add-movie-modal #add-movie-form textarea {
@@ -228,14 +233,14 @@ main {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
 }
 
 #controls #add-movie #add-movie-modal #add-movie-form #form-buttons button {
+  margin-top: 20px;
   border: 1px solid black;
-  width: 200px;
+  width: 100px;
   height: 50px;
 }
 
@@ -254,8 +259,10 @@ main {
 
 #movies .movie {
   cursor: pointer;
-  border-top: 4px solid black;
+  border-top: 10px solid #646464;
+  border-radius: 10px;
   padding: 5px;
+  padding-top: 10px;
   overflow: hidden;
   padding-bottom: 30px;
   height: 220px;
@@ -269,9 +276,11 @@ main {
 }
 
 #movies .movie .title {
-  height: 35px;
+  height: 30px;
   text-align: center;
-  overflow: hidden;
+  overflow: scroll;
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 
 #movies .movie .side-1 {
@@ -370,5 +379,5 @@ main {
 }
 
 #movies .watched {
-  border-top: 4px solid #969696;
+  border-top: 10px solid #8b8f68;
 }
