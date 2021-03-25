@@ -6,6 +6,7 @@
     padding: 0;
     font-size: 10px;
     font-family: "Lato", sans-serif;
+    user-select: none;
 }
 
 button {
@@ -31,7 +32,7 @@ input[type='checkbox'], input[type='submit'] {
         padding: 10px;
         border: 1px solid black;
         &:hover {
-            background-color: rgb(253, 253, 253);
+            background-color: rgb(250, 250, 250);
         }
     }
 }
@@ -39,10 +40,11 @@ input[type='checkbox'], input[type='submit'] {
 // HEADER
 header {
     padding: 15px;
-    border-bottom: 2px black solid;
     display: flex; 
     justify-content: center;
     align-items: center;
+    background-color: rgb(250, 250, 250);
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.4);
     h1 {
         text-transform: uppercase;
         letter-spacing: 10px;
@@ -61,7 +63,15 @@ header {
         margin-right: 50px;
         position: relative;
         button {
-            @include button(small);
+            border: none;
+            outline: none;
+
+            i {
+                font-size: 25px;
+                &:hover {
+                    color: rgb(100, 100, 100);
+                }
+            }
         }
         #movies-info {
             display: none;
@@ -111,23 +121,33 @@ main {
 
     #sort{
         label {
-            font-size: 1.3rem;
+            font-size: 1.5rem;
             margin-right: 5px;
         }
 
         select {
-            font-size: 1.2rem;
+            font-size: 1.4rem;
+            cursor: pointer;
+            margin-right: 5px;
+            padding: 3px;   
         
             option {
                 font-size: 1.2rem;
+                cursor: pointer;
             }
         }
     }
 
     #add-movie {
-
         button {
-            @include button(small);
+            outline: none;
+            border: none;
+            i {
+                font-size: 30px;
+                &:hover {
+                    color:rgb(100, 100, 100);
+                }
+            }
         }
 
         #add-movie-modal {
@@ -149,17 +169,20 @@ main {
                 transform: translateX(-50%);
                 width: 30%;
                 margin: auto;
-                margin-top: 0px;
+                margin-top: -50px;
                 display: flex;
                 border: 1px solid black;
-                padding: 10px;
+                padding: 25px;
                 background-color: white;;
                 flex-direction: column;
                 z-index: 5;
+                border-radius: 20px;
 
                 h2 {
                     text-align: center;
-                    margin-bottom: 10px;
+                    margin-bottom: 20px;
+                    margin-top: 10px;
+                    font-size: 1.5rem;
                 }
 
                 input, textarea {
@@ -168,6 +191,13 @@ main {
 
                 textarea {
                     resize: none;
+                    font-size: 1.1rem;
+                    padding: 5px;
+                }
+
+                input {
+                    padding: 5px;
+                    font-size: 1.1rem;
                 }
 
                 #watched-input-container {
@@ -175,6 +205,20 @@ main {
 
                     label {
                         margin-right: 10px;
+                        font-size: 1.1rem;
+                    }
+                }
+
+                #form-buttons {
+                    display: flex;
+                    justify-content: space-between;
+                    button {
+                        border: 1px solid black;
+                        &:hover {
+                            background-color: rgb(250, 250, 250);
+                        }
+                        width: 200px;
+                        height: 50px;
                     }
                 }
             }
@@ -276,6 +320,9 @@ main {
             button {
                 width: 50px;
                 padding: 5px;
+                &:hover {
+                    background-color: rgb(250, 250, 250);
+                }
             }
         }
     }

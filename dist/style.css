@@ -4,6 +4,10 @@
   padding: 0;
   font-size: 10px;
   font-family: "Lato", sans-serif;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
 }
 
 button {
@@ -25,7 +29,6 @@ input[type='checkbox'], input[type='submit'] {
 
 header {
   padding: 15px;
-  border-bottom: 2px black solid;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -35,6 +38,9 @@ header {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  background-color: #fafafa;
+  -webkit-box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.4);
+          box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.4);
 }
 
 header h1 {
@@ -57,12 +63,16 @@ header #toggle-info {
 }
 
 header #toggle-info button {
-  padding: 10px;
-  border: 1px solid black;
+  border: none;
+  outline: none;
 }
 
-header #toggle-info button:hover {
-  background-color: #fdfdfd;
+header #toggle-info button i {
+  font-size: 25px;
+}
+
+header #toggle-info button i:hover {
+  color: #646464;
 }
 
 header #toggle-info #movies-info {
@@ -116,25 +126,33 @@ main {
 }
 
 #controls #sort label {
-  font-size: 1.3rem;
+  font-size: 1.5rem;
   margin-right: 5px;
 }
 
 #controls #sort select {
-  font-size: 1.2rem;
+  font-size: 1.4rem;
+  cursor: pointer;
+  margin-right: 5px;
+  padding: 3px;
 }
 
 #controls #sort select option {
   font-size: 1.2rem;
+  cursor: pointer;
 }
 
 #controls #add-movie button {
-  padding: 10px;
-  border: 1px solid black;
+  outline: none;
+  border: none;
 }
 
-#controls #add-movie button:hover {
-  background-color: #fdfdfd;
+#controls #add-movie button i {
+  font-size: 30px;
+}
+
+#controls #add-movie button i:hover {
+  color: #646464;
 }
 
 #controls #add-movie #add-movie-modal {
@@ -158,23 +176,26 @@ main {
           transform: translateX(-50%);
   width: 30%;
   margin: auto;
-  margin-top: 0px;
+  margin-top: -50px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
   border: 1px solid black;
-  padding: 10px;
+  padding: 25px;
   background-color: white;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
   z-index: 5;
+  border-radius: 20px;
 }
 
 #controls #add-movie #add-movie-modal #add-movie-form h2 {
   text-align: center;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
+  margin-top: 10px;
+  font-size: 1.5rem;
 }
 
 #controls #add-movie #add-movie-modal #add-movie-form input, #controls #add-movie #add-movie-modal #add-movie-form textarea {
@@ -183,6 +204,13 @@ main {
 
 #controls #add-movie #add-movie-modal #add-movie-form textarea {
   resize: none;
+  font-size: 1.1rem;
+  padding: 5px;
+}
+
+#controls #add-movie #add-movie-modal #add-movie-form input {
+  padding: 5px;
+  font-size: 1.1rem;
 }
 
 #controls #add-movie #add-movie-modal #add-movie-form #watched-input-container {
@@ -193,6 +221,26 @@ main {
 
 #controls #add-movie #add-movie-modal #add-movie-form #watched-input-container label {
   margin-right: 10px;
+  font-size: 1.1rem;
+}
+
+#controls #add-movie #add-movie-modal #add-movie-form #form-buttons {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+
+#controls #add-movie #add-movie-modal #add-movie-form #form-buttons button {
+  border: 1px solid black;
+  width: 200px;
+  height: 50px;
+}
+
+#controls #add-movie #add-movie-modal #add-movie-form #form-buttons button:hover {
+  background-color: #fafafa;
 }
 
 #movies {
@@ -315,6 +363,10 @@ main {
 #movies .movie .movie-controls button {
   width: 50px;
   padding: 5px;
+}
+
+#movies .movie .movie-controls button:hover {
+  background-color: #fafafa;
 }
 
 #movies .watched {

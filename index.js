@@ -313,6 +313,9 @@ function render() {
 
     // update info 
     updateInfo();
+
+    // set to local
+    setLocalStorage();
 }
 
 // handler for the button to delete movie
@@ -471,4 +474,24 @@ function sortControlHandler() {
         }
     }
 }
+
+// local storage
+// set
+function setLocalStorage() {
+    localStorage.setItem('movieLibrary', JSON.stringify(movieLibrary));
+}
+
+//retrieve
+function getLocalStorage() {
+    const getItem = localStorage.getItem("movieLibrary");
+    if (!getItem) {
+        setLocalStorage(); 
+        render();
+    } else {
+        movieLibrary = JSON.parse(getItem);
+        render();
+    }
+}
+
+getLocalStorage();
 

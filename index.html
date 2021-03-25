@@ -8,6 +8,10 @@
     <link rel="stylesheet" href="dist/style.css">
     <!-- JS -->
     <script defer src='index.js'></script>
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" />
+    <!-- Favicon -->
+    <link rel="shortcut icon" type="image/svg" href="images/video-solid.svg"/>
     <title>MyMovies</title>
 </head>
 <body>
@@ -16,7 +20,7 @@
             <h1>M<span id='header-name-y'>y</span>Movies</h1>
         </div>
         <div id="toggle-info">
-            <button id='toggle-info-button'>Info</button>
+            <button id='toggle-info-button'><i class="fas fa-info-circle"></i></button>
             <div id="movies-info">
                 <h2>Movies Info</h2>
                 <table>
@@ -65,7 +69,7 @@
                 </select>
             </div>
             <div id="add-movie">
-                <button id='add-movie-button'>Add Movie</button>
+                <button id='add-movie-button'><i class="fas fa-plus-square"></i></button>
                 <div id="add-movie-modal">
                     <div id="modal-background">
 
@@ -83,8 +87,10 @@
                         <textarea id="comment-input" cols="20" rows="5" placeholder="Comment"></textarea>
                         <input type="url" id='image-input' placeholder="Image URL">
                         <!-- type='button' necessary so form doesn't think there are two submits -->
-                        <button type='button' id='cancel-button'>Cancel</button> 
-                        <button id='submit-button' type="submit">Add Movie</button>
+                        <div id="form-buttons">
+                            <button type='button' id='cancel-button'>Cancel</button> 
+                            <button id='submit-button' type="submit">Add Movie</button>
+                        </div>
                     </form>
                 </div>
             </div>
