@@ -17,6 +17,35 @@
         </div>
         <div id="toggle-info">
             <button id='toggle-info-button'>Info</button>
+            <div id="movies-info">
+                <h2>Movies Info</h2>
+                <table>
+                    <tr>
+                        <td>
+                            Total:
+                        </td>
+                        <td class='table-data' id='total-movies'>
+                            
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Watched:
+                        </td>
+                        <td class='table-data' id='watched-movies'>
+                            
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            Unwatched:
+                        </td>
+                        <td class='table-data' id='unwatched-movies'>
+                            
+                        </td>
+                    </tr>
+                </table>
+            </div>
         </div>
     </header>
     <main>
@@ -31,8 +60,8 @@
                     <option value="rating">Rating</option>
                 </select>
                 <select id="sort-control-order">
-                    <option value="desc">Descending</option>
-                    <option value="asc">Ascending</option>
+                    <option value="desc">Desc.</option>
+                    <option value="asc">Asc.</option>
                 </select>
             </div>
             <div id="add-movie">

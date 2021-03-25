@@ -121,8 +121,8 @@ function validateForm() {
     } else if (formData.year !== "" && (formData.year < 1888 || formData.year > currentYear)) {
         alert("Pleae enter a valid year between 1888 and " + currentYear + ".");
         return false;
-    } else if (formData.rating !== "" && (formData.rating < 1 || formData.rating > 10 || formData.rating.toString().length > 3)) {
-        alert("Please enter a valid rating between 1-10 to at most one decimal place.");
+    } else if (formData.rating !== "" && (formData.rating < 1 || formData.rating > 10)) {
+        alert("Please enter a valid rating between 1-10.");
         return false;
     }
 
@@ -209,6 +209,11 @@ function createMovie(movieObj) {
         containerDiv.classList.add("watched");
     }
     containerDiv.classList.add("show-side-1");
+
+    // round rating
+    movieObj.rating = Number(movieObj.rating).toFixed(1);
+
+    console.log(movieObj.rating);
 
     side1.classList.add("side-1");
     side1Title.classList.add("title");
@@ -298,6 +303,9 @@ function render() {
     movieLibrary.forEach(movie => {
         createMovie(movie);
     })
+
+    // update info 
+    updateInfo();
 }
 
 // handler for the button to delete movie
@@ -352,3 +360,52 @@ function changeFormToSubmit() {
     formTitle.textContent = "Add Movie";
     formSubmit.textContent = "Add Movie";
 }
+
+// info button
+const infoButton = document.querySelector("#toggle-info-button");
+infoButton.addEventListener("click", infoButtonHandler);
+
+function infoButtonHandler() {
+    // implement info toggling
+    infoToggleShow();
+
+    updateInfo();
+
+}
+
+function infoToggleShow() {
+    const infoSection = document.querySelector("#movies-info");
+    infoSection.classList.toggle("movies-info-show");
+    if (infoSection.classList.contains("movies-info-show")) {
+        infoSection.style.display = "block";
+    } else {
+        infoSection.style.display = "none";
+    }
+}
+
+
+function updateInfo() {
+    let totalMovies = 0;
+    let totalWatched = 0;
+
+    const totalMoviesDOM = document.querySelector("#total-movies");
+    const totalWatchedDOM = document.querySelector("#watched-movies");
+    const totalUnwatchedDOM = document.querySelector("#unwatched-movies");
+
+    totalMovies = movieLibrary.length;
+    for (let movie of movieLibrary) {
+        if (movie.watched === true) totalWatched += 1;
+    }
+
+    totalMoviesDOM.textContent = totalMovies;
+    totalWatchedDOM.textContent = totalWatched;
+    totalUnwatchedDOM.textContent = totalMovies - totalWatched;
+}
+
+// implement movie sorting
+const sortControl = document.querySelector("#sort-control");
+const sortControlOrder = document.querySelector("#sort-control-order");
+
+sortControl.addEventListener("change", () => {
+    console.log("YEt")
+})

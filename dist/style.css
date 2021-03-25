@@ -53,6 +53,7 @@ header h1 #header-name-y {
 header #toggle-info {
   margin-left: auto;
   margin-right: 50px;
+  position: relative;
 }
 
 header #toggle-info button {
@@ -62,6 +63,36 @@ header #toggle-info button {
 
 header #toggle-info button:hover {
   background-color: #fdfdfd;
+}
+
+header #toggle-info #movies-info {
+  display: none;
+  border: 5px solid black;
+  padding: 10px;
+  background-color: white;
+  position: absolute;
+  right: 50px;
+  top: 0px;
+}
+
+header #toggle-info #movies-info h2 {
+  text-align: center;
+  font-size: 1.5rem;
+  margin-bottom: 10px;
+}
+
+header #toggle-info #movies-info table {
+  border-spacing: 10px;
+  border-right: 50px;
+}
+
+header #toggle-info #movies-info table td {
+  font-weight: 500;
+  font-size: 1.4rem;
+}
+
+header #toggle-info #movies-info table .table-data {
+  text-align: right;
 }
 
 main {
