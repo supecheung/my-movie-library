@@ -60,6 +60,9 @@ function submitHandler() {
     closeModal();
     changeFormToSubmit();
 
+    // update order
+    sortControlHandler();
+
     // render
     render();
 }
@@ -94,6 +97,10 @@ function getFormInputs() {
 function openModal() {
     const modal = document.querySelector("#add-movie-modal");
     modal.style.display = 'block';
+
+    // when open, focus on title 
+    const titleInput = document.querySelector("#title-input");
+    titleInput.focus();
 }
 
 function closeModal() {
@@ -211,9 +218,9 @@ function createMovie(movieObj) {
     containerDiv.classList.add("show-side-1");
 
     // round rating
-    movieObj.rating = Number(movieObj.rating).toFixed(1);
-
-    console.log(movieObj.rating);
+    if (movieObj.rating) {
+        movieObj.rating = Number(movieObj.rating).toFixed(1);
+    }
 
     side1.classList.add("side-1");
     side1Title.classList.add("title");
@@ -407,5 +414,61 @@ const sortControl = document.querySelector("#sort-control");
 const sortControlOrder = document.querySelector("#sort-control-order");
 
 sortControl.addEventListener("change", () => {
-    console.log("YEt")
-})
+    sortControlHandler();
+});
+
+sortControlOrder.addEventListener("change", () => {
+    sortControlHandler();
+});
+
+function sortControlHandler() {
+    const sortControl = document.querySelector("#sort-control");
+    const sortControlOrder = document.querySelector("#sort-control-order");
+
+    const sortControlValue = sortControl.value;
+    const sortControlOrderValue = sortControlOrder.value;
+    
+    // check scenarios
+    if (sortControlValue === 'order-added') {
+        if (sortControlOrderValue === 'desc') {
+            movieLibrary = movieLibrary.sort((a, b) => b.id - a.id);
+            render();
+        } else {
+            movieLibrary = movieLibrary.sort((a, b) => a.id - b.id);
+            render();
+        }
+    } else if (sortControlValue === 'director') {
+        if (sortControlOrderValue === 'desc') {
+            movieLibrary = movieLibrary.sort((a, b) => b.director.localeCompare(a.director));
+            render();
+        } else {
+            movieLibrary = movieLibrary.sort((a, b) => a.director.localeCompare(b.director));
+            render();
+        }
+    } else if(sortControlValue === 'title') {
+        if (sortControlOrderValue === 'desc') {
+            movieLibrary = movieLibrary.sort((a, b) => b.title.localeCompare(a.title));
+            render();
+        } else {
+            movieLibrary = movieLibrary.sort((a, b) => a.title.localeCompare(b.title));
+            render();
+        }
+    } else if(sortControlValue === 'year') {
+        if (sortControlOrderValue === 'desc') {
+            movieLibrary = movieLibrary.sort((a, b) => b.year - a.year);
+            render();
+        } else {
+            movieLibrary = movieLibrary.sort((a, b) => a.year - b.year);
+            render();
+        }
+    } else if (sortControlValue === 'rating') {
+        if (sortControlOrderValue === 'desc') {
+            movieLibrary = movieLibrary.sort((a, b) => b.rating - a.rating);
+            render();
+        } else {
+            movieLibrary = movieLibrary.sort((a, b) => a.rating - b.rating);
+            render();
+        }
+    }
+}
+
