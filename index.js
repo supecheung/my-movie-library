@@ -46,26 +46,38 @@ function submitHandler() {
     // convert form data to movie object
     const newMovie = new Movie(formData);
 
-    movieLibrary.push(newMovie);
-    
+    const replaceStatus = checkIfReplace(newMovie);
+    if (replaceStatus >= 0) {
+        movieLibrary.splice(replaceStatus, 1, newMovie);
+    } else {
+        movieLibrary.push(newMovie);
+    }
+
     // update id
     updateId();
 
     // close and reset modal
     closeModal();
+    changeFormToSubmit();
 
     // render
     render();
 }
 
-function getFormInputs(idInput = null) {
-    // form input selectors
-    let id = null;
-    if (!idInput) {
-        id = currentId;
-    } else {
-        id = idInput;
+// checks if the id already exists previously
+function checkIfReplace(movieObj) {
+    for (let i = 0; i < movieLibrary.length; i++) {
+        if (movieLibrary[i].id === movieObj.id) {
+            return i;
+        }
     }
+
+    return -1;
+}
+
+function getFormInputs() {
+    // form input selectors
+    const id = currentId;
     const title = document.querySelector("#title-input").value;
     const director = document.querySelector("#director-input").value;
     const year = document.querySelector("#year-input").value;
@@ -90,21 +102,43 @@ function closeModal() {
     const modalForm = document.querySelector("#add-movie-form");
     modal.style.display = 'none';
     modalForm.reset();
+
+    // clean out any lag on the currentId that may arise
+    updateId();
+
+    // revert form to original
+    changeFormToSubmit();
 }
 
 function validateForm() {
+    // get year for year validatoin
+    const currentYear = new Date().getFullYear();
+
     const formData = getFormInputs();
     if (formData.title === "") {
         alert("Please enter a movie title.");
         return false;
-    } else {
-        return true;
+    } else if (formData.year !== "" && (formData.year < 1888 || formData.year > currentYear)) {
+        alert("Pleae enter a valid year between 1888 and " + currentYear + ".");
+        return false;
+    } else if (formData.rating !== "" && (formData.rating < 1 || formData.rating > 10 || formData.rating.toString().length > 3)) {
+        alert("Please enter a valid rating between 1-10 to at most one decimal place.");
+        return false;
     }
+
+    return true;
 }
 
-//update id when need be
+//update id to be one above the highest value in the array
 function updateId() {
-    currentId += 1;
+    let champion = 0;
+    for (let movie of movieLibrary) {
+        if (movie.id > champion) {
+            champion = movie.id;
+        }
+    }
+
+    currentId = champion + 1;
 }
 
 
@@ -116,6 +150,12 @@ movies.forEach(movie => movie.addEventListener("mousedown", event => {
 
 //switch from side one to side two
 function switchMovieSide(event) {
+
+    //make sure that what is clicked are not the edit buttons
+    if (event.target.classList.contains("edit-movie") || event.target.classList.contains("delete-movie")) {
+        return;
+    }
+
     const target = event.currentTarget; //only get the '.movie' target and not its children
     target.classList.toggle("show-side-1");
     const targetSide1 = target.querySelector(".side-1");
@@ -190,9 +230,9 @@ function createMovie(movieObj) {
     side2CommentsSpan.textContent = movieObj.comment;
 
     movieControls.classList.add("movie-controls");
-    movieControlsEdit.setAttribute("id", "edit-movie");
+    movieControlsEdit.classList.add("edit-movie");
     movieControlsEdit.textContent = "Edit";
-    movieControlsDelete.setAttribute("id", "delete-movie");
+    movieControlsDelete.classList.add("delete-movie");
     movieControlsDelete.textContent = "Delete";
 
     // check if year is empty
@@ -233,11 +273,13 @@ function createMovie(movieObj) {
     // vivify delete button
     movieControlsDelete.addEventListener("click", () => {
         movieDeleteButtonHandler(movieObj);
+
     });
 
     // vivify edit button
     movieControlsEdit.addEventListener("click", () => {
         movieEditButtonHandler(movieObj);
+
     });
 
 
@@ -285,9 +327,28 @@ function movieEditButtonHandler(movieObj) {
     const imageURL = document.querySelector("#image-input");
     imageURL.value = movieObj.imageURL;
 
+    // edit form name
+    changeFormToEdit();
+
     // change currentID to this movieObj.id
+    currentId = movieObj.id;
     // in submitHandler, if a matching id in array, replace that item
     // always make currentID one above the highest in the array
     // in closeModal, update currentID to be the highest as well to handle cases that the edit window closed prematurely
 }
 
+function changeFormToEdit() {
+    // edit form name
+    const formTitle = document.querySelector("form h2");
+    const formSubmit = document.querySelector("#submit-button");
+    formTitle.textContent = "Edit Movie";
+    formSubmit.textContent = "Edit Movie";
+}
+
+function changeFormToSubmit() {
+    // edit form name
+    const formTitle = document.querySelector("form h2");
+    const formSubmit = document.querySelector("#submit-button");
+    formTitle.textContent = "Add Movie";
+    formSubmit.textContent = "Add Movie";
+}
