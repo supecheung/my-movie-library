@@ -7,7 +7,6 @@ Live Demo
 ### Video demo
 ![video demo gif](https://github.com/supecheung/my-movie-library/blob/main/doc/myMoviesGIF.gif)
 
-
 ### Movie card
 - Can be flipped by clicking
 - Side 1: movie title, year, rating, and image
