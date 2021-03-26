@@ -5,7 +5,7 @@ Live Demo
 
 ## Features
 ### Video demo
-![video demo gif](https://github.com/supecheung/my-movie-library/blob/main/doc/myMoviesGIF.gif)
+![video demo gif](https://github.com/supecheung/my-movie-library/blob/main/docs/myMoviesGIF.gif)
 
 ### Movie card
 - Can be flipped by clicking
